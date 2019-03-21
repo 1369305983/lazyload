@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+        <style>        
+            img{
+                width: 500px;
+                height: 500px;
+                display: block;
+            }
+        </style>
+    </head>
+    <body>
+            <div class = "box">
+                <img asrc = "./img/1.jpg" src="" alt="img1"/>
+                <img asrc = "./img/2.jpg" src="" alt="img1"/>
+                <img asrc = "./img/3.jpg" src="" alt="img1"/>
+                <img asrc = "./img/4.jpg" src="" alt="img1"/>
+                <img asrc = "./img/5.jpg" src="" alt="img1"/>
+                <img asrc = "./img/6.jpg" src="" alt="img1"/>
+                <img asrc = "./img/7.jpg" src="" alt="img1"/>
+                <img asrc = "./img/1.jpg" src="" alt="img1"/>
+                <img asrc = "./img/2.jpg" src="" alt="img1"/>
+                <img asrc = "./img/3.jpg" src="" alt="img1"/>
+                <img asrc = "./img/4.jpg" src="" alt="img1"/>
+                <img asrc = "./img/5.jpg" src="" alt="img1"/>
+                <img asrc = "./img/6.jpg" src="" alt="img1"/>
+                <img asrc = "./img/7.jpg" src="" alt="img1"/>
+                <img asrc = "./img/1.jpg" src="" alt="img1"/>
+                <img asrc = "./img/2.jpg" src="" alt="img1"/>
+                <img asrc = "./img/3.jpg" src="" alt="img1"/>
+                <img asrc = "./img/4.jpg" src="" alt="img1"/>
+                <img asrc = "./img/5.jpg" src="" alt="img1"/>
+                <img asrc = "./img/6.jpg" src="" alt="img1"/>
+                <img asrc = "./img/7.jpg" src="" alt="img1"/>
+            </div>
+    </body>
+    <script type="text/javascript">
+        (function(){
+            function tagName(tagName){
+                return document.getElementsByTagName(tagName);
+            }function addEvent(obj,type,func){
+                if(obj.addEventListener){
+                    obj.addEventListener(type,func,false);
+                }else if(obj.attachEvent){
+                    obj.attachEvent('on'+type,func);
+                }
+            }
+            var v = {
+                eleGroup:null,
+                eleTop:null,
+                eleHeight:null,
+                screenHeight:null,
+                limitHeight:null
+            }
+            console.log(v)
+            function init(element){
+                v.eleGroup = document.getElementsByTagName(element);
+                v.screenHeight = document.documentElement.clientHeight;
+                var len = v.eleGroup.length;
+                for(var i = 0;i < len; i++){
+                    if(v.eleGroup[i].offsetTop<v.screenHeight&&v.eleGroup[i].getAttribute("asrc")){
+                        v.eleGroup[i].setAttribute("src",v.eleGroup[i].getAttribute("asrc"));
+                        v.eleGroup[i].removeAttribute("asrc");
+                    }
+                }
+            }
+           
+            function lazyload(){
+                console.log("hhhh")
+                v.limitHeight = document.documentElement.scrollTop || document.body.scrollTop + document.documentElement.clientHeight;
+                console.log(v.limitHeight)
+                var len = v.eleGroup.length;
+                for(var j = 0 ;j < len; j++){
+                    console.log(v.limitHeight)
+                    console.log(j)
+                    console.log(document.documentElement.scrollTop + document.documentElement.clientHeight)
+                    if(v.eleGroup[j].offsetTop <= document.documentElement.scrollTop + document.documentElement.clientHeight&&v.eleGroup[j].getAttribute("asrc")){
+                        v.eleGroup[j].setAttribute("src",v.eleGroup[j].getAttribute("asrc"));
+                        v.eleGroup[j].removeAttribute("asrc");
+                    }
+                }
+            }
+            init("img");
+            
+            addEvent(window,"scroll",lazyload);
+        })()
+    </script>
+</html>
